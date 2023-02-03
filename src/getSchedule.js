@@ -1,6 +1,6 @@
 const data = require('../data/zoo_data');
 
-const week = {
+let week = {
   Tuesday: {
     officeHour: '',
     exhibition: [] },
@@ -23,6 +23,35 @@ const week = {
     officeHour: 'CLOSED',
     exhibition: 'The zoo will be closed!' },
 };
+
+const addSundayMonday = (object) => {
+  const days = object;
+  days.Sunday = {
+    officeHour: '',
+    exhibition: [] };
+  days.Monday = {
+    officeHour: 'CLOSED',
+    exhibition: 'The zoo will be closed!' };
+};
+const resetWeek = () => {
+  week = {
+    Tuesday: { officeHour: '',
+      exhibition: [] },
+    Wednesday: {
+      officeHour: '',
+      exhibition: [] },
+    Thursday: {
+      officeHour: '',
+      exhibition: [] },
+    Friday: {
+      officeHour: '',
+      exhibition: [] },
+    Saturday: {
+      officeHour: '',
+      exhibition: [] } };
+  addSundayMonday(week);
+};
+
 const getScheduleName = (scheduleTarget) => data.species
   .find((specie) => specie.name === scheduleTarget).availability;
 
@@ -63,6 +92,7 @@ const getScheduleEmpty = () => {
   exhibition();
 };
 const getSchedule = (scheduleTarget) => {
+  resetWeek();
   if (scheduleTarget) {
     if (week[scheduleTarget]) {
       getScheduleEmpty();
